@@ -8,44 +8,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import apitiendavideo.apitiendavideo.entidades.Empresa;
 import apitiendavideo.apitiendavideo.entidades.Pais;
-import apitiendavideo.apitiendavideo.interfaces.IPaisServicio;
+import apitiendavideo.apitiendavideo.entidades.Titulo;
+import apitiendavideo.apitiendavideo.interfaces.IEmpresaServicio;
 
 @RestController
-@RequestMapping("/paises")
-public class PaisControlador {
+@RequestMapping("/empresas")
+public class EmpresaControlador {
 
-    private IPaisServicio servicio;
+    private IEmpresaServicio servicio;
 
-    public PaisControlador(IPaisServicio servicio) {
+    public EmpresaControlador(IEmpresaServicio servicio) {
         this.servicio = servicio;
     }
 
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
-    public List<Pais> listar() {
+    public List<Empresa> listar() {
         return this.servicio.listar();
     }
 
     @RequestMapping(value = "/obtener/{id}", method = RequestMethod.GET)
-    public Pais obtener(@PathVariable long id) {
+    public Empresa obtener(@PathVariable long id) {
         return this.servicio.obtener(id);
     }
 
     @RequestMapping(value = "/buscar/{nombre}", method = RequestMethod.GET)
-    public List<Pais> buscar(@PathVariable String nombre) {
+    public List<Empresa> buscar(@PathVariable String nombre) {
         return this.servicio.buscar(nombre);
     }
 
     @RequestMapping(value = "/agregar", method = RequestMethod.POST)
-    public Pais agregar(@RequestBody Pais pais) {
-        pais.setId(0);
-        return this.servicio.guardar(pais);
+    public Empresa agregar(@RequestBody Empresa empresa) {
+        empresa.setId(0);
+        return this.servicio.guardar(empresa);
     }
 
     @RequestMapping(value = "/modificar", method = RequestMethod.PUT)
-    public Pais modificar(@RequestBody Pais pais) {
-        if (this.servicio.obtener(pais.getId()) != null) {
-            return this.servicio.guardar(pais);
+    public Empresa modificar(@RequestBody Empresa empresa) {
+        if (this.servicio.obtener(empresa.getId()) != null) {
+            return this.servicio.guardar(empresa);
         } else {
             return null;
         }
@@ -56,5 +58,8 @@ public class PaisControlador {
         return this.servicio.eliminar(id);
     }
 
-
+    @RequestMapping(value = "/obtenertitulos/{nombre}", method = RequestMethod.GET)
+    public List<Titulo> obtenerTitulos(@PathVariable String nombre) {
+        return this.servicio.obtenerTitulos(nombre);
+    }
 }
