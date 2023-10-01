@@ -24,17 +24,28 @@ public class PaisServicio implements IPaisServicio {
 
     @Override
     public Pais obtener(long id) {
-        return null;
+        var pais = repositorio.findById(id);
+        return pais.isEmpty() ? null : pais.get();
     }
 
     @Override
     public Pais guardar(Pais pais) {
-        return null;
+        return repositorio.save(pais);
     }
 
     @Override
     public boolean eliminar(long id) {
-        return true;
+        try {
+            repositorio.deleteById(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Pais> buscar(String nombre) {
+        return repositorio.buscar(nombre);
     }
 
 }

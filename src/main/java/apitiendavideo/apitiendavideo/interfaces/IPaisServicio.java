@@ -10,6 +10,8 @@ public interface IPaisServicio {
 
     public Pais obtener(long id);
 
+    public List<Pais> buscar(String nombre);
+
     public Pais guardar(Pais pais);
 
     public boolean eliminar(long id);
