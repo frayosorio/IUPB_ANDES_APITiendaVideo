@@ -1,4 +1,4 @@
-package apitiendavideo.apitiendavideo.modelos;
+package apitiendavideo.apitiendavideo.entidades;
 
 import org.hibernate.annotations.GenericGenerator;
 
