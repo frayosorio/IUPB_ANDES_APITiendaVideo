@@ -9,49 +9,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import apitiendavideo.apitiendavideo.entidades.Pais;
-import apitiendavideo.apitiendavideo.interfaces.IPaisServicio;
+import apitiendavideo.apitiendavideo.entidades.Titulo;
+import apitiendavideo.apitiendavideo.interfaces.ITituloServicio;
 
 @RestController
-@RequestMapping("/paises")
-public class PaisControlador {
+@RequestMapping("/titulos")
+public class TituloControlador {
 
-    private IPaisServicio servicio;
+    private ITituloServicio servicio;
 
-    public PaisControlador(IPaisServicio servicio) {
+    public TituloControlador(ITituloServicio servicio) {
         this.servicio = servicio;
     }
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
-    public List<Pais> listar() {
+    public List<Titulo> listar() {
         return this.servicio.listar();
     }
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/obtener/{id}", method = RequestMethod.GET)
-    public Pais obtener(@PathVariable long id) {
+    public Titulo obtener(@PathVariable long id) {
         return this.servicio.obtener(id);
     }
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/buscar/{nombre}", method = RequestMethod.GET)
-    public List<Pais> buscar(@PathVariable String nombre) {
+    public List<Titulo> buscar(@PathVariable String nombre) {
         return this.servicio.buscar(nombre);
     }
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/agregar", method = RequestMethod.POST)
-    public Pais agregar(@RequestBody Pais pais) {
-        pais.setId(0);
-        return this.servicio.guardar(pais);
+    public Titulo agregar(@RequestBody Titulo titulo) {
+        titulo.setId(0);
+        return this.servicio.guardar(titulo);
     }
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/modificar", method = RequestMethod.PUT)
-    public Pais modificar(@RequestBody Pais pais) {
-        if (this.servicio.obtener(pais.getId()) != null) {
-            return this.servicio.guardar(pais);
+    public Titulo modificar(@RequestBody Titulo titulo) {
+        if (this.servicio.obtener(titulo.getId()) != null) {
+            return this.servicio.guardar(titulo);
         } else {
             return null;
         }
@@ -62,6 +62,5 @@ public class PaisControlador {
     public boolean eliminar(@PathVariable long id) {
         return this.servicio.eliminar(id);
     }
-
 
 }
